@@ -11,6 +11,7 @@ package-lock.*
 
 # typescript
 *.tsbuildinfo
+*.eslintcache
 
 # Environmental
 *.env
