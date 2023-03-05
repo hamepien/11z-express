@@ -4,7 +4,7 @@
     "description": "A flexible library for building fast API (Application program interface) and maintainable.",
     "scripts": {
         "dev:example": "nodemon --exec ts-node -T ./example/server.ts",
-        "build": "tsc --project ./tsconfig.build.json && npm run bundle:cjs && npm run bundle:cjs:min && npm run bundle:esm && npm run bundle:esm:min && npm run bundle:umd && npm run bundle:umd:min",
+        "build": "npm run clean && tsc --project ./tsconfig.build.json && npm run bundle:cjs && npm run bundle:cjs:min && npm run bundle:esm && npm run bundle:esm:min && npm run bundle:umd && npm run bundle:umd:min",
         "bundle:cjs": "rollup ./dist/index.js --file ./dist/bundle/index.cjs -m --format cjs",
         "bundle:cjs:min": "terser --ecma 2017 --compress --mangle --module -o ./dist/index.min.cjs -- ./dist/bundle/index.cjs",
         "bundle:esm": "rollup ./dist/index.js --file ./dist/bundle/index.mjs -m --format esm",
