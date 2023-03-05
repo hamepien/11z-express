@@ -1,0 +1,1 @@
+Object.defineProperty(exports,"__esModule",{value:!0});const e=require("tslib");require("@11z/core");const r=e.__importDefault(require("express"));e.__exportStar(require("./src"),exports),exports.default=r.default;
