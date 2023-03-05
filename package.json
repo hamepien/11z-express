@@ -13,7 +13,7 @@
         "bundle:umd:min": "terser --ecma 2017 --compress --mangle --module -o ./dist/index.umd.min.js -- ./dist/bundle/index.umd.js",
         "clean": "rimraf ./dist ./.tsbuildinfo ./.eslintcache",
         "check-types": "tsc --pretty --noEmit",
-        "lint": "eslint . --ext .ts",
+        "lint": "eslint . --ext .ts --cache --fix",
         "format": "prettier --write ./**/*.ts",
         "check-format": "prettier --check ./**/*.ts",
         "prepare": "husky install",
