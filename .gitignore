@@ -2,8 +2,8 @@
 node_modules
 
 # production
-src
-index.ts
+/src
+/index.ts
 
 # debug
 yarn.lock*
