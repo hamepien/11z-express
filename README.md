@@ -30,6 +30,7 @@ A flexible library for building fast API (Application program interface) and mai
     -   [@Params](#params)
     -   [@Validation](#validation)
     -   [@Route](#route)
+-   [Router](#router)
 -   [Customize](#customize)
 -   [Exception](#exception)
 -   [The end](#the-end)
@@ -380,6 +381,25 @@ export class ExampleApi {
         return 'hello world!'
     }
 }
+```
+
+<a href="#router"></a>
+
+## Router
+
+The `Router` is a top-level class used to attach and register decorated route.
+
+```ts
+import express, { Router } from '@11z/express'
+
+// Initialize express.
+const app = express()
+
+// Router constance.
+const router = new Router(app)
+
+// Attach and register decorated route.
+router.attach('/', [route, ...])
 ```
 
 <a href="#exception"></a>
