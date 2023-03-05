@@ -362,7 +362,13 @@ export class ExampleApi {
 > In addition to the 5 common http methods `@Get(), @Post(), @Put(), @Patch(), @Delete()` that we provided, there are some other http methods such as `all, trace, head, options, etc.` that we didn't
 > provided. you can customize it to your needs.
 
+Example:
+
+`./api.method.ts`
+
 ```ts
+import { METHOD_DECORATOR_FACTORY, PathParams } from '@11z/express'
+
 // Head http method.
 const Head = (url?: PathParams, status: number = 200) => METHOD_DECORATOR_FACTORY('head', url, status)
 
