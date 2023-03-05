@@ -367,6 +367,8 @@ Example:
 `./api.method.ts`
 
 ```ts
+import { METHOD_DECORATOR_FACTORY, PathParams } from '@11z/express'
+
 // Head http method.
 const Head = (url?: PathParams, status: number = 200) => METHOD_DECORATOR_FACTORY('head', url, status)
 
