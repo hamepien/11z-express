@@ -1,0 +1,17 @@
+# dependencies
+node_modules
+
+# production
+dist
+
+# debug
+yarn.lock*
+yarn-error.*
+package-lock.*
+
+# typescript
+*.tsbuildinfo
+
+# Environmental
+*.env
+*.env.*

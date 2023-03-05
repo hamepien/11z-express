@@ -1,0 +1,26 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "env": {
+        "commonjs": true,
+        "browser": false,
+        "node": false
+    },
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": "latest"
+    },
+    "overrides": [
+        {
+            "files": ["./**/*.ts"],
+            "parserOptions": {
+                "project": "./tsconfig.json"
+            }
+        }
+    ],
+    "extends": ["eslint:recommended", "plugin:@typescript-eslint/eslint-recommended"],
+    "plugins": ["@typescript-eslint", "prettier"],
+    "rules": {
+        "no-unused-vars": 0
+    }
+}
