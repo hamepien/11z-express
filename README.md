@@ -30,6 +30,7 @@ A flexible library for building fast API (Application program interface) and mai
     -   [@Params](#params)
     -   [@Validation](#validation)
     -   [@Route](#route)
+-   [Customize](#customize)
 -   [Exception](#exception)
 -   [The end](#the-end)
 
@@ -189,7 +190,7 @@ A specific endpoint for HTTP requests.
 
 Possible methods:
 
-`@All(), @Get(), @Post(), @Put(), @Patch(), @Delete(), @Options(), @Head(), @Trace(), @Connect()`
+`@Get(), @Post(), @Put(), @Patch(), @Delete()`
 
 Example:
 
@@ -267,6 +268,8 @@ import { Req, Request, Body } from '@11z/express'
 
 export class ExampleApi {
     public helloWorld(@Req() req: Request, @Body() body: object): string {
+        // `req.body` regular use.
+        // instead of `req.body` use `@Body() param` with `body` => req.body
         return 'hello world!'
     }
 }
@@ -316,6 +319,60 @@ import express, { Route } from '@11z/express'
 
 @Route([], { router: express.Router() })
 export class ExampleRoute {}
+```
+
+<a href="#customize"></a>
+
+## Customize
+
+You can customize some Apis according to your needs.
+
+### @Middleware
+
+Most come with `middleware`. It has to be flexible. Sure, we got it!
+
+Example:
+
+`./api.middleware.ts`
+
+```ts
+import { Middleware, UnauthorizedError } from '@11z/express'
+
+// Check if user is not log in.
+const Authenticated = () =>
+    Middleware([
+        (req, res, next) => {
+            if (req.isUnAuthenticated()) {
+                throw new UnauthorizedError('You are not logged in.')
+            }
+        }
+    ])
+
+// Example usage:
+export class ExampleApi {
+    @Authenticated()
+    public helloWorld(): string {
+        return 'hello world!'
+    }
+}
+```
+
+### @Method
+
+> In addition to the 5 common http methods `@Get(), @Post(), @Put(), @Patch(), @Delete()` that we provided, there are some other http methods such as `all, trace, head, options, etc.` that we didn't
+> provided. you can customize it to your needs.
+
+```ts
+// Head http method.
+const Head = (url?: PathParams, status: number = 200) => METHOD_DECORATOR_FACTORY('head', url, status)
+
+// Example usage:
+export class ExampleApi {
+    @Head()
+    public helloWorld(): string {
+        return 'hello world!'
+    }
+}
 ```
 
 <a href="#exception"></a>
