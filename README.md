@@ -8,9 +8,10 @@ A flexible library for building fast API (Application program interface) and mai
 
 -   Error handler such as 404 exception and global exception ✔
 -   Catch async error on all routes ✔
--   OOP based routing or functional is also supported ✔
--   Typescript support out of the box. `cjs`, `umd` are also supported ✔
--   Route validation based on `zod`, `yup`... ✔
+-   `OOP` and `MVC` based routing or functionality are also supported ✔
+-   Typescript support out of the box. `cjs`, `umd` are also supported. ✔
+-   Route validation ✔
+-   Lighter, easier and maintainable ✔
 
 👉 Some of these features are optional.
 
@@ -23,13 +24,24 @@ A flexible library for building fast API (Application program interface) and mai
     -   [Attach and register decorated route](#attach-and-register-decorated-route)
 -   [Installation](#installation)
 -   [Apis](#api)
+    -   [@Api](#api)
+    -   [@Method](#method)
+    -   [@Middleware](#middleware)
+    -   [@Params](#params)
+    -   [@Validation](#validation)
+    -   [@Route](#route)
 -   [Exception](#exception)
+-   [The end](#the-end)
+
+<a href="#example"></a>
 
 ## Example
 
-> Note: You don’t need to install the express library. everything are included.
+> Note: You don’t need to install the express library. everything is included.
 
-Start the server:
+<a href="#start-the-server"></a>
+
+#### Start the server:
 
 `./server.ts`
 
@@ -42,7 +54,9 @@ const app = express()
 app.listen(4000, () => console.log('Server is up! visit: http://localhost:4000'))
 ```
 
-Register route:
+<a href="#register-route"></a>
+
+#### Register route:
 
 `./server.ts`
 
@@ -61,7 +75,9 @@ app.get('/', (_req, res) => {
 app.listen(4000, () => console.log('Server is up! visit: http://localhost:4000'))
 ```
 
-With decorator:
+<a href="#with-decorator"></a>
+
+#### With decorator:
 
 `./ex.api.ts`
 
@@ -87,7 +103,9 @@ import { ExampleApi } from './cat.api.ts'
 export class ExampleRoute {}
 ```
 
-Attach and register decorated route:
+<a href="#attach-and-register-decorated-route"></a>
+
+#### Attach and register decorated route:
 
 `./server.ts`
 
@@ -108,6 +126,8 @@ router.attach('/api/v1', [ExampleRoute])
 app.listen(4000, () => console.log('Server is up! visit: http://localhost:4000'))
 ```
 
+<a href="#installation"></a>
+
 ## Installation
 
 > You need nodeJs [install](https://nodejs.org).
@@ -122,8 +142,8 @@ npm i @11z/core
 2. npx tsc --init - to create tsconfig.json file.
 ```
 
-As we know the library is using `@decorator` without enabling some additional features. typescript will complaining. You have to enable the additional feature of typescript. in `tsconfig.json` file
-enable these:
+As we all know, the library uses `@decorator` without enabling some additional features. Typescript will complain. You need to enable these additional features of Typescript. In the file
+'tsconfig.json' Launch these:
 
 ```json
 {
@@ -134,9 +154,13 @@ enable these:
 
 That's it. let's get into coding! see [example](#example).
 
+<a href="#apis"></a>
+
 ## Apis
 
-We provided all the apis that you will need to build a flexible application and maintainable.
+We provide all the Apis that you will need to create a flexible and maintainable application.
+
+<a href="#api"></a>
 
 ### @Api
 
@@ -152,6 +176,8 @@ import { Api } from '@11z/express'
 @Api()
 export class ExampleApi {}
 ```
+
+<a href="#method"></a>
 
 ### @Method
 
@@ -178,13 +204,17 @@ export class ExampleApi {
 }
 ```
 
+<a href="#middleware"></a>
+
 ### @Middleware
 
 A function which is called before the route handler.
 
 -   @param `mids` execute any code.
 
-Example: method middleware.
+Example:
+
+method middleware
 
 ```ts
 import { Middleware } from '@11z/express'
@@ -202,7 +232,9 @@ export class ExampleApi {
 }
 ```
 
-Example: route middleware.
+Example:
+
+route middleware
 
 ```ts
 import { Middleware } from '@11z/express'
@@ -215,6 +247,8 @@ import { Middleware } from '@11z/express'
 ])
 export class ExampleRoute {}
 ```
+
+<a href="#params"></a>
 
 ### @Params
 
@@ -238,13 +272,21 @@ export class ExampleApi {
 }
 ```
 
+<a href="#validation"></a>
+
 ### @Validation
 
 Validation middleware. A function which is called before the route handler.
 
 -   @param `schema` schema object.
 
+Supported library: `zod`
+
+> Note: With some libraries besides `zod` can also be integrated with routing validation, but you just have to set it up yourself. Our developers are working on it to put everything convenient.
+
 Example:
+
+with zod
 
 ```ts
 import { ValidateRequest, Validation } from '@11z/express'
@@ -257,6 +299,8 @@ export class ExampleApi {
     }
 }
 ```
+
+<a href="#route"></a>
 
 ### @Route
 
@@ -274,6 +318,8 @@ import express, { Route } from '@11z/express'
 export class ExampleRoute {}
 ```
 
+<a href="#exception"></a>
+
 ## Exception
 
 No docs description yet.
@@ -289,3 +335,9 @@ Example:
 ```ts
 throw new ConflictError('User is already exist.')
 ```
+
+<a href="#the-end"></a>
+
+## The end
+
+**@11z/express** build everything Api (Application program interface) lighter, easier and maintainable.
