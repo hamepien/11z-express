@@ -11,7 +11,7 @@
         "bundle:esm:min": "terser --ecma 2017 --compress --mangle --module -o ./dist/index.min.mjs -- ./dist/bundle/index.mjs",
         "bundle:umd": "rollup ./dist/index.js --file ./dist/bundle/index.umd.js -m --format umd",
         "bundle:umd:min": "terser --ecma 2017 --compress --mangle --module -o ./dist/index.umd.min.js -- ./dist/bundle/index.umd.js",
-        "clean": "rimraf ./dist ./.tsbuildinfo",
+        "clean": "rimraf ./dist ./.tsbuildinfo ./.eslintcache",
         "check-types": "tsc --pretty --noEmit",
         "lint": "eslint . --ext .ts",
         "format": "prettier --write ./**/*.ts",
@@ -31,7 +31,8 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/hamepien/11z-express.git"
+        "url": "https://github.com/hamepien/11z-express.git",
+        "directory": "@11z/express"
     },
     "bugs": {
         "url": "https://github.com/hamepien/11z-express/issues"
@@ -51,7 +52,7 @@
         "express": "^5.0.0-beta.1"
     },
     "devDependencies": {
-        "@11z/core": "^0.29.0",
+        "@11z/core": "^1.0.0",
         "@commitlint/cli": "^17.4.4",
         "@commitlint/config-conventional": "^17.4.4",
         "@types/chai": "^4.3.4",
@@ -78,6 +79,7 @@
     },
     "lint-staged": {
         "./**/*.ts": [
+            "eslint . --ext .ts --cache --fix",
             "prettier --write --ignore-unknown"
         ]
     },
