@@ -52,6 +52,7 @@ import express from '@11z/express'
 // Initialize express.
 const app = express()
 
+// Listen for connections.
 app.listen(4000, () => console.log('Server is up! visit: http://localhost:4000'))
 ```
 
