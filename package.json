@@ -53,7 +53,7 @@
         "express": "^5.0.0-beta.1"
     },
     "devDependencies": {
-        "@11z/core": "^1.1.0",
+        "@11z/core": "^1.2.0",
         "@commitlint/cli": "^17.4.4",
         "@commitlint/config-conventional": "^17.4.4",
         "@types/chai": "^4.3.4",
