@@ -137,8 +137,6 @@ class Router {
         // Global handler.
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         this._app.use((err, _req, res, _next) => {
-            // Log error on the backend side.
-            console.error(err.stack);
             // Response logic.
             if (err instanceof errors_1.CustomError) {
                 res.status(err.status).send({
@@ -148,6 +146,8 @@ class Router {
                 });
             }
             else {
+                // Log error on the backend side.
+                console.error(err.stack);
                 res.status(500).send({
                     status: 500,
                     error: 'INTERNAL_SERVER_ERROR',
