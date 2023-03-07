@@ -106,9 +106,6 @@ class Router {
                     else if (result !== undefined) {
                         !res.headersSent && res.send(result);
                     }
-                    else if (typeof result === 'undefined') {
-                        !res.headersSent && res.send(result);
-                    }
                     return result; // Return the custom argument's result.
                 };
                 // Mids and validation constance.
