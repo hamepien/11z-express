@@ -1,8 +1,10 @@
-import { Api, Get } from '../index'
+import { object, string } from 'zod'
+import { Api, Get, ValidateRequest, Validation } from '../index'
 
 @Api('/ex')
 export class ExampleApi {
     @Get()
+    @Validation(object<ValidateRequest>({ query: object({ botName: string() }) }))
     public helloWord(): string {
         return 'Hello word'
     }

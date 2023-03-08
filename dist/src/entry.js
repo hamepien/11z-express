@@ -172,7 +172,7 @@ class Router {
      */
     validateResource(schema) {
         return async (req, res, next) => {
-            var _a, _b;
+            var _a, _b, _c, _d;
             try {
                 // TODO: tmr task.
                 await schema.parseAsync({
@@ -187,7 +187,7 @@ class Router {
                     res.status(422).send({
                         status: 422,
                         error: 'UNPROCESSABLE_ENTITY',
-                        message: ((_b = (_a = err === null || err === void 0 ? void 0 : err.issues) === null || _a === void 0 ? void 0 : _a.at(0)) === null || _b === void 0 ? void 0 : _b.message) || 'Validation error.'
+                        message: `${(_b = (_a = err === null || err === void 0 ? void 0 : err.issues) === null || _a === void 0 ? void 0 : _a.at(0)) === null || _b === void 0 ? void 0 : _b.path.at(1)}: ${(_d = (_c = err === null || err === void 0 ? void 0 : err.issues) === null || _c === void 0 ? void 0 : _c.at(0)) === null || _d === void 0 ? void 0 : _d.message}` || 'Validation error.'
                     });
                 }
                 else {
