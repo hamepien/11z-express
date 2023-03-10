@@ -8,8 +8,6 @@ const params_1 = require("./lib/extract/params");
 const guards_1 = require("./utils/guards");
 const errors_1 = require("./lib/errors");
 const throw_error_1 = require("./lib/throw.error");
-const catch_async_errors_1 = require("./lib/catch-async-errors");
-const package_json_1 = require("express/package.json");
 class Router {
     /**
      * @param app express initial.
@@ -28,10 +26,6 @@ class Router {
      */
     attach(prefix, Handlers) {
         const Routes = this.removeDuplicatedArr(Handlers);
-        // Catch route async errors.
-        if (parseInt(package_json_1.version, 10) <= 4) {
-            (0, catch_async_errors_1.patchRouterParam)();
-        }
         Routes.forEach((Route) => {
             const routeMetadata = store_se_1.Store.container.get(Route, types_1.MetadataKeys.__route__); // Parents.
             const routeMidsMetadata = store_se_1.Store.container.get(Route, types_1.MetadataKeys.__route_middleware__); // Parents.
@@ -41,10 +35,10 @@ class Router {
                 (0, core_1.defineInjector)(Api);
                 // Router handler.
                 this.routerHandler(prefix, Api, routeMidsMetadata, routeMetadata.routeOptions.router, this.getInstance);
+                // Execute error handler.
+                this.errorHandlers();
             });
         });
-        // Execute error handler.
-        this.errorHandlers();
     }
     /**
      * No docs description yet.
@@ -76,17 +70,17 @@ class Router {
                 const apiMethodValidationMetadata = store_se_1.Store.container.getOwn(Api.prototype, types_1.MetadataKeys.__api_method_validation__, method.propertyKey); // A child of apiMetadata.
                 // Url path logic.
                 const methodUrlPath = this.removeTrailingSlash(method.url);
-                const routerUrlPath = `${apiUrlPath}${methodUrlPath}`;
+                const routeUrlPath = `${apiUrlPath}${methodUrlPath}`;
                 // Original declared Fn.
                 const declaredFn = method.descriptor.value;
                 // Method logic.
                 method.descriptor.value = function (req, res, next) {
                     // Extract params as an arguments.
                     const args = (0, params_1.extractParams)(req, res, next)(apiMethodParamsMetadata);
-                    // Apply response status.
-                    res.status(method.status);
                     // Apply custom arguments.
                     const result = declaredFn.apply(apiRouteInstance, args);
+                    // Apply response status.
+                    res.status(method.status);
                     /**
                      * Custom response result.
                      *
@@ -106,11 +100,11 @@ class Router {
                     else if ((0, guards_1.isServerResponse)(result)) {
                         !res.headersSent && res.send(result);
                     }
-                    else if ((0, guards_1.isReadableStream)(result)) {
-                        result.pipe(res);
-                    }
                     else if (result !== undefined) {
                         !res.headersSent && res.send(result);
+                    }
+                    else if ((0, guards_1.isReadableStream)(result)) {
+                        result.pipe(res);
                     }
                     return result; // Return the custom argument's result.
                 };
@@ -118,8 +112,8 @@ class Router {
                 const mMids = this.removeDuplicatedArr(apiMethodMidsMetadata);
                 const rMids = this.removeDuplicatedArr(routeMids);
                 const validation = apiMethodValidationMetadata ? this.validateResource(apiMethodValidationMetadata) : [];
-                // Inject router fn into the router provider.
-                router[method.method](routerUrlPath, validation, ...rMids, ...mMids, this.catchAsyncErrors(method.descriptor.value));
+                // Inject route fn into the router provider.
+                router[method.method](routeUrlPath, validation, ...rMids, ...mMids, this.catchAsyncErrors(method.descriptor.value));
             });
         });
         // Register router.
