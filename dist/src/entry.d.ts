@@ -29,6 +29,13 @@ export declare class Router {
      */
     private routerHandler;
     /**
+     * If the function passed in is not an async function, return the function. If it is an async
+     * function, return a function that resolves the async function and catches any errors.
+     * @param {Function} fn - Function - The function to be wrapped
+     * @returns A function that takes in a request, response, and next function.
+     */
+    private catchAsyncErrors;
+    /**
      * No docs description yet.
      */
     private errorHandlers;

@@ -119,11 +119,22 @@ class Router {
                 const rMids = this.removeDuplicatedArr(routeMids);
                 const validation = apiMethodValidationMetadata ? this.validateResource(apiMethodValidationMetadata) : [];
                 // Inject router fn into the router provider.
-                router[method.method](routerUrlPath, validation, ...rMids, ...mMids, method.descriptor.value);
+                router[method.method](routerUrlPath, validation, ...rMids, ...mMids, this.catchAsyncErrors(method.descriptor.value));
             });
         });
         // Register router.
         this._app.use(preUrlPath, router);
+    }
+    /**
+     * If the function passed in is not an async function, return the function. If it is an async
+     * function, return a function that resolves the async function and catches any errors.
+     * @param {Function} fn - Function - The function to be wrapped
+     * @returns A function that takes in a request, response, and next function.
+     */
+    catchAsyncErrors(fn) {
+        if (fn.constructor.name !== 'AsyncFunction')
+            return fn;
+        return (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
     }
     /**
      * No docs description yet.
@@ -169,7 +180,6 @@ class Router {
         return async (req, res, next) => {
             var _a, _b, _c, _d;
             try {
-                // TODO: tmr task.
                 await schema.parseAsync({
                     body: req.body,
                     query: req.query,
