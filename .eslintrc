@@ -7,7 +7,6 @@
         "node": false
     },
     "parserOptions": {
-        "sourceType": "module",
         "ecmaVersion": "latest"
     },
     "overrides": [
