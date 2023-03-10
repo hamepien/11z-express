@@ -8,6 +8,8 @@ const params_1 = require("./lib/extract/params");
 const guards_1 = require("./utils/guards");
 const errors_1 = require("./lib/errors");
 const throw_error_1 = require("./lib/throw.error");
+const catch_async_errors_1 = require("./lib/catch-async-errors");
+const package_json_1 = require("express/package.json");
 class Router {
     /**
      * @param app express initial.
@@ -26,6 +28,10 @@ class Router {
      */
     attach(prefix, Handlers) {
         const Routes = this.removeDuplicatedArr(Handlers);
+        // Catch route async errors.
+        if (parseInt(package_json_1.version, 10) <= 4) {
+            (0, catch_async_errors_1.patchRouterParam)();
+        }
         Routes.forEach((Route) => {
             const routeMetadata = store_se_1.Store.container.get(Route, types_1.MetadataKeys.__route__); // Parents.
             const routeMidsMetadata = store_se_1.Store.container.get(Route, types_1.MetadataKeys.__route_middleware__); // Parents.
@@ -113,7 +119,7 @@ class Router {
                 const rMids = this.removeDuplicatedArr(routeMids);
                 const validation = apiMethodValidationMetadata ? this.validateResource(apiMethodValidationMetadata) : [];
                 // Inject router fn into the router provider.
-                router[method.method](routerUrlPath, validation, ...rMids, ...mMids, this.catchAsyncErrors(method.descriptor.value));
+                router[method.method](routerUrlPath, validation, ...rMids, ...mMids, method.descriptor.value);
             });
         });
         // Register router.
@@ -152,17 +158,6 @@ class Router {
                 });
             }
         });
-    }
-    /**
-     * No docs description yet.
-     *
-     * @param fn express's request handler.
-     * @returns
-     */
-    catchAsyncErrors(fn) {
-        if (fn.constructor.name !== 'AsyncFunction')
-            return fn;
-        return (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
     }
     /**
      * No docs description yet.

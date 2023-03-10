@@ -35,13 +35,6 @@ export declare class Router {
     /**
      * No docs description yet.
      *
-     * @param fn express's request handler.
-     * @returns
-     */
-    private catchAsyncErrors;
-    /**
-     * No docs description yet.
-     *
      * @param schema any object schema.
      * @returns
      */
