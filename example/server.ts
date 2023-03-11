@@ -1,5 +1,5 @@
 import express, { Router } from '../index'
-import { ExampleRoute, ExampleRoute2 } from './ex.ro'
+import { ExampleRoute, ExampleRoute2 } from './ex.rou'
 
 // Initialize express.
 const app = express()
