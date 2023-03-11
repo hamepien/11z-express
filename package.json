@@ -1,6 +1,6 @@
 {
     "name": "@11z/express",
-    "version": "1.21.0",
+    "version": "1.22.0",
     "description": "A flexible library for building fast API (Application program interface) and maintainable.",
     "scripts": {
         "dev:example": "nodemon --exec ts-node -T ./example/server.ts",
