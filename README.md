@@ -82,7 +82,7 @@ app.listen(4000, () => console.log('Server is up! visit: http://localhost:4000')
 
 #### With decorator:
 
-`./ex.sev`
+`./ex.sev.ts`
 
 See more about [@11z/core](https://github.com/hamepien/11z-core).
 
