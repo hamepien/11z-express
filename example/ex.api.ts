@@ -1,12 +1,15 @@
 import { object, string } from 'zod'
 import { Api, Get, ValidateRequest, Validation } from '../index'
+import { ExampleService } from './ex.sev'
 
 @Api('/ex')
 export class ExampleApi {
+    constructor(private readonly exampleService: ExampleService) {}
+
     @Get()
-    @Validation(object<ValidateRequest>({ query: object({ botName: string() }) }))
+    @Validation(object<ValidateRequest>({ query: object({ botName: string().optional() }) }))
     public async helloWord() {
-        return 'Hello world!'
+        return this.exampleService.helloWorld()
     }
 }
 

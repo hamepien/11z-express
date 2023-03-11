@@ -82,21 +82,39 @@ app.listen(4000, () => console.log('Server is up! visit: http://localhost:4000')
 
 #### With decorator:
 
-`./ex.api.ts`
+`./ex.sev`
+
+See more about [@11z/core](https://github.com/hamepien/11z-core).
 
 ```ts
-import { Api, Get } from '@11z/express'
+import { Injectable } from '@11z/core'
 
-@Api()
-export class ExampleApi {
-    @Get()
+@Injectable()
+export class ExampleService {
     public helloWorld(): string {
-        return 'hello world!'
+        return 'Hello world!'
     }
 }
 ```
 
-`./ex.ro.ts`
+`./ex.api.ts`
+
+```ts
+import { Api, Get } from '@11z/express'
+import { ExampleService } from './ex.sev.ts'
+
+@Api()
+export class ExampleApi {
+    constructor(private readonly exampleService: ExampleService) {}
+
+    @Get()
+    public helloWorld(): string {
+        return this.exampleService.helloWorld()
+    }
+}
+```
+
+`./ex.rou.ts`
 
 ```ts
 import express, { Route } from '@11z/express'
@@ -115,7 +133,7 @@ export class ExampleRoute {}
 ```ts
 import express, { Router } from '@11z/express'
 import { ExampleRoute } from './ex.ro.ts'
-import { connect } from './database'
+import { connect } from './database' // this could be mongo, sql, etc.
 
 // Initialize express.
 const app = express()
