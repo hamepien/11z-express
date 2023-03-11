@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0});const tslib_1=require("tslib");require("@11z/core"),require("./src/lib/catch-async-errors");const express_1=tslib_1.__importDefault(require("express"));tslib_1.__exportStar(require("./src"),exports),exports.default=express_1.default;
