@@ -115,6 +115,7 @@ export class ExampleRoute {}
 ```ts
 import express, { Router } from '@11z/express'
 import { ExampleRoute } from './ex.ro.ts'
+import { connect } from './database'
 
 // Initialize express.
 const app = express()
@@ -125,8 +126,16 @@ const router = new Router(app)
 // Attach and register decorated route.
 router.attach('/api/v1', [ExampleRoute])
 
-// Listen for connections.
-app.listen(4000, () => console.log('Server is up! visit: http://localhost:4000'))
+async function __main__() {
+    // TODO: Connect to database.
+    await connect({ uri: 'DB_URI' })
+
+    // Listen for connections.
+    app.listen(4000, () => console.log('Server is up! visit: http://localhost:4000'))
+}
+
+// Execute main.
+__main__()
 ```
 
 <a href="#installation"></a>

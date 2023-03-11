@@ -5,8 +5,8 @@ import { Api, Get, ValidateRequest, Validation } from '../index'
 export class ExampleApi {
     @Get()
     @Validation(object<ValidateRequest>({ query: object({ botName: string() }) }))
-    public helloWord(): string {
-        return 'Hello word'
+    public async helloWord() {
+        return 'Hello world!'
     }
 }
 
@@ -14,6 +14,6 @@ export class ExampleApi {
 export class ExampleApi2 {
     @Get()
     public helloWord(): string {
-        return 'Hello word 2'
+        return 'Hello word 2!'
     }
 }
