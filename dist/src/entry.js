@@ -10,10 +10,10 @@ const errors_1 = require("./lib/errors");
 const throw_error_1 = require("./lib/throw.error");
 class Router {
     /**
-     * @param app express initial.
+     * @param initial express initial.
      */
-    constructor(app) {
-        this._app = app;
+    constructor({ initial }) {
+        this._app = initial;
     }
     /**
      * Attach and register application's decorated route.

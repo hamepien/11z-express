@@ -2,13 +2,15 @@ import { PathParams } from './utils/types';
 import { Express } from 'express';
 export declare class Router {
     /**
-     * @property `_app` express initial.
+     * @property `_app` express initialize.
      */
     private readonly _app;
     /**
-     * @param app express initial.
+     * @param initial express initial.
      */
-    constructor(app: Express);
+    constructor({ initial }: {
+        initial: Express;
+    });
     /**
      * Attach and register application's decorated route.
      *
