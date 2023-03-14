@@ -142,7 +142,7 @@ import { connect } from './database' // this could be mongo, sql, etc.
 const app = express()
 
 // Router instance.
-const router = new Router(app)
+const router = new Router({ initial: app })
 
 // Attach and register decorated route.
 router.attach('/api/v1', [ExampleRoute])
@@ -301,7 +301,7 @@ import { Req, Request, Body } from '@11z/express'
 export class ExampleApi {
     public helloWorld(@Req() req: Request, @Body() body: object): string {
         // `req.body` regular use.
-        // instead of `req.body` use `@Body() param` with `body` => req.body
+        // instead of `req.body` use `@Body()` param => req.body
         return 'hello world!'
     }
 }
@@ -377,7 +377,7 @@ const Authenticated = () =>
     Middleware([
         (req, res, next) => {
             if (req.isUnAuthenticated()) {
-                throw new UnauthorizedError('You are not logged in.')
+                throw new UnauthorizedError('User unauthorized.')
             }
         }
     ])
@@ -457,7 +457,7 @@ import express, { Router } from '@11z/express'
 const app = express()
 
 // Router constance.
-const router = new Router(app)
+const router = new Router({ initial: app })
 
 // Attach and register decorated route.
 router.attach('/', [route, ...])
