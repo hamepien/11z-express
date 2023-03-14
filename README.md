@@ -32,6 +32,9 @@ A flexible library for building fast API (Application program interface) and mai
     -   [@Route](#route)
 -   [Router](#router)
 -   [Customize](#customize)
+    -   [Middleware](#customize-middleware)
+    -   [Method](#customize-method)
+    -   [Errors](#customize-errors)
 -   [Exception](#exception)
 -   [The end](#the-end)
 
@@ -356,7 +359,9 @@ export class ExampleRoute {}
 
 You can customize some Apis according to your needs.
 
-### @Middleware
+<a href="#customize-middleware"></a>
+
+### Middleware
 
 Most come with `middleware`. It has to be flexible. Sure, we got it!
 
@@ -386,7 +391,9 @@ export class ExampleApi {
 }
 ```
 
-### @Method
+<a href="#customize-method"></a>
+
+### Method
 
 > In addition to the 5 common http methods `@Get(), @Post(), @Put(), @Patch(), @Delete()` that we provided, there are some other http methods such as `all, trace, head, options, etc.` that we didn't
 > provided. you can customize it to your needs.
@@ -408,6 +415,33 @@ export class ExampleApi {
         return 'hello world!'
     }
 }
+```
+
+<a href="#customize-errors"></a>
+
+### Errors
+
+Customize `response` error.
+
+Example:
+
+`./errors.err.ts`
+
+```ts
+import { CustomError } from '@11z/express'
+
+export class BadRequestError extends CustomError {
+    public readonly status = 400
+    public readonly error = 'BAD_REQUEST'
+
+    constructor(public readonly message: string) {
+        super(message)
+        Object.setPrototypeOf(this, BadRequestError.prototype)
+    }
+}
+
+// Example usage:
+throw new BadRequestError('Any message.')
 ```
 
 <a href="#router"></a>
