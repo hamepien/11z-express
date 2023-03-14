@@ -31,7 +31,7 @@ export declare class ConflictError extends CustomError {
 /**
  * No docs description yet.
  */
-export declare class ValidationError extends CustomError {
+export declare class UnprocessableError extends CustomError {
     readonly message: string;
     readonly status = 422;
     readonly error = "UNPROCESSABLE_ENTITY";

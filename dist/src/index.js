@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ValidationError = exports.UnauthorizedError = exports.NotFoundError = exports.ForbiddenError = exports.CustomError = exports.ConflictError = exports.Router = exports.Validation = exports.Route = exports.Res = exports.Req = exports.Query = exports.Put = exports.Post = exports.Patch = exports.Params = exports.Next = exports.Middleware = exports.METHOD_DECORATOR_FACTORY = exports.Headers = exports.Get = exports.Delete = exports.Ctx = exports.Cookies = exports.Body = exports.Api = void 0;
+exports.UnprocessableError = exports.UnauthorizedError = exports.NotFoundError = exports.ForbiddenError = exports.CustomError = exports.ConflictError = exports.Router = exports.Validation = exports.Route = exports.Res = exports.Req = exports.Query = exports.Put = exports.Post = exports.Patch = exports.Params = exports.Next = exports.Middleware = exports.METHOD_DECORATOR_FACTORY = exports.Headers = exports.Get = exports.Delete = exports.Ctx = exports.Cookies = exports.Body = exports.Api = void 0;
 /** Export all decorators. */
 var deco_1 = require("./deco");
 Object.defineProperty(exports, "Api", { enumerable: true, get: function () { return deco_1.Api; } });
@@ -31,5 +31,5 @@ Object.defineProperty(exports, "CustomError", { enumerable: true, get: function 
 Object.defineProperty(exports, "ForbiddenError", { enumerable: true, get: function () { return errors_1.ForbiddenError; } });
 Object.defineProperty(exports, "NotFoundError", { enumerable: true, get: function () { return errors_1.NotFoundError; } });
 Object.defineProperty(exports, "UnauthorizedError", { enumerable: true, get: function () { return errors_1.UnauthorizedError; } });
-Object.defineProperty(exports, "ValidationError", { enumerable: true, get: function () { return errors_1.ValidationError; } });
+Object.defineProperty(exports, "UnprocessableError", { enumerable: true, get: function () { return errors_1.UnprocessableError; } });
 //# sourceMappingURL=index.js.map

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ForbiddenError = exports.ValidationError = exports.ConflictError = exports.NotFoundError = exports.UnauthorizedError = void 0;
+exports.ForbiddenError = exports.UnprocessableError = exports.ConflictError = exports.NotFoundError = exports.UnauthorizedError = void 0;
 const tslib_1 = require("tslib");
 const custom_error_1 = require("./custom.error");
 /** Export custom error. */
@@ -47,16 +47,16 @@ exports.ConflictError = ConflictError;
 /**
  * No docs description yet.
  */
-class ValidationError extends custom_error_1.CustomError {
+class UnprocessableError extends custom_error_1.CustomError {
     constructor(message) {
         super(message);
         this.message = message;
         this.status = 422;
         this.error = 'UNPROCESSABLE_ENTITY';
-        Object.setPrototypeOf(this, ValidationError.prototype);
+        Object.setPrototypeOf(this, UnprocessableError.prototype);
     }
 }
-exports.ValidationError = ValidationError;
+exports.UnprocessableError = UnprocessableError;
 /**
  * No docs description yet.
  */
