@@ -5,7 +5,7 @@ import { ExampleRoute, ExampleRoute2 } from './ex.rou'
 const app = express()
 
 // Router instance.
-const router = new Router(app)
+const router = new Router({ initial: app })
 
 // Apply middleware.
 app.use(express.json({ limit: '10mb' }))
